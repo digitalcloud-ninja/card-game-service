@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="basePath">target/logs</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="logfile" fileName="${basePath}/app-info.log" filePattern="${basePath}/app-info-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="pattern=[%d{yyyy-MM-dd HH:mm:ss.SSS}][%level][%t][%c{1}] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+ß        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%level][%t][%c{1}] - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!-- Class Loggers -->
+        <Logger name="org.magnuson.games" level="all" additivity="false">
+            <appender-ref ref="console" level="DEBUG" />
+            <appender-ref ref="logfile" level="INFO" />
+        </Logger>
+        <!-- Root Logger -->
+        <Root level="WARN" additivity="false">
+            <appender-ref ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
